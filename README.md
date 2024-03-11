@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Testing Best Practices for ArcGIS Maps SDK Projects
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An example project that demonstrates JavaScript testing principles and practices described in the **Automating CI/CD and Testing Best Practices for ArcGIS Maps SDK Projects** talk at the [2024 Esri DevSummit](https://devsummit2024.esri.com/).
 
-## Available Scripts
+This project makes use of the following:
 
-In the project directory, you can run:
+* [Create React App](https://create-react-app.dev/) to setup a general framework for the application.
+* [Jest]() for the unit testing framework.
+* [Testing Library]() provides some helper functions for testing.
+* [Selenium]() to script an end-to-end test.
+* [ExpressJS]() for a simple backend to simulate server interaction.
 
-### `npm start`
+## Slides and Recording
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+A recording and slides of the presentation will be available at a later date. It *should* be uploaded to the [Esri Mediaspace](https://mediaspace.esri.com) after the summit.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setup
 
-### `npm test`
+[NodeJS]() version 20 is required to run this project. It *might* work on other versions.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+After cloning the repository, install the dependencies by running the following in a command prompt
+in the base directory.
 
-### `npm run build`
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running The Project
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Start up the project by running the following in a command prompt:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run start
+```
 
-### `npm run eject`
+It will take several seconds to start up the web and backend server. The script should also open a
+browser window to the site, but you can view the site at http://localhost:3000.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Unit Testing
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Run the project's unit testing by entering the following in a command prompt:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm run test
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This runs the unit tests in interactive watch mode. Enter `a` at the command prompt to re-run the
+tests. Enter `q` to exit the test runner. 
 
-## Learn More
+## End-To-End Testing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You will need to install the [Chrome webdriver]() for Selenium. This allows Selenium to control a
+Google Chrome browser for testing. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+After installing the webdriver, enter the following in a command prompt:
 
-### Code Splitting
+```bash
+node .\src\selenium_test.js
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Selenium will open an instance of Chrome for testing. 
