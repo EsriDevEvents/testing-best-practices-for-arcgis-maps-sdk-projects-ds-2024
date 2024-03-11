@@ -5,10 +5,10 @@ An example project that demonstrates JavaScript testing principles and practices
 This project makes use of the following:
 
 * [Create React App](https://create-react-app.dev/) to setup a general framework for the application.
-* [Jest]() for the unit testing framework.
-* [Testing Library]() provides some helper functions for testing.
-* [Selenium]() to script an end-to-end test.
-* [ExpressJS]() for a simple backend to simulate server interaction.
+* [Jest](https://jestjs.io/) for the unit testing framework.
+* [Testing Library](https://testing-library.com/) provides some helper functions for testing.
+* [Selenium](https://www.selenium.dev/) to script an end-to-end test.
+* [ExpressJS](https://expressjs.com/) for a simple backend to simulate server interaction.
 
 ## Slides and Recording
 
@@ -16,7 +16,7 @@ A recording and slides of the presentation will be available at a later date. It
 
 ## Setup
 
-[NodeJS]() version 20 is required to run this project. It *might* work on other versions.
+[NodeJS](https://nodejs.org/) version 20 is required to run this project. It *might* work on other versions.
 
 After cloning the repository, install the dependencies by running the following in a command prompt
 in the base directory.
@@ -49,7 +49,7 @@ tests. Enter `q` to exit the test runner.
 
 ## End-To-End Testing
 
-You will need to install the [Chrome webdriver]() for Selenium. This allows Selenium to control a
+You will need to install the [Chrome webdriver](https://chromedriver.chromium.org/) for Selenium. This allows Selenium to control a
 Google Chrome browser for testing. 
 
 After installing the webdriver, enter the following in a command prompt:
