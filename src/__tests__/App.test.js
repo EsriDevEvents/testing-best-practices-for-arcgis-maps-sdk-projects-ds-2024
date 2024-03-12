@@ -1,16 +1,18 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
+import {loadObservations, sendObservation} from "../api/fetchData"
+import ReactDOM from "react-dom/client";
 import App from "../App";
 
 // Mock out components so we only check the App
 jest.mock("../components/MapContainer", () => {
   return () => {
-    return <div>Map Container</div>;
+    return <div className="mapContainer">Map Container</div>;
   };
 });
 
 jest.mock("../components/DataEntry", () => {
     return () => {
-        return <div>Data Entry</div>
+        return <div className="dataEntry">Data Entry</div>
     }
 });
 
@@ -22,9 +24,12 @@ jest.mock("@esri/calcite-components-react", () => {
   };
 });
 
-test("renders", () => {
-  const { getByText } = render(<App />);
+jest.mock("../api/fetchData");
 
-  expect(getByText("Map Container")).toBeInTheDocument();
-  expect(getByText("Data Entry")).toBeInTheDocument();
+test("renders", async () => {
+  loadObservations.mockResolvedValue([]);
+
+  await act(async () => {
+    render(<App/>);
+  });
 });

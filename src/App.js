@@ -7,37 +7,32 @@ import { CalciteShell, CalciteShellPanel, CalcitePanel } from "@esri/calcite-com
 import MapContainer from './components/MapContainer';
 import DataEntry from "./components/DataEntry";
 
+import {loadObservations, sendObservation} from "./api/fetchData";
+
 
 function App() {
   const [currentPoint, setCurrentPoint] = useState(null);
   const [loadedPoints, setLoadedPoints] = useState([]);
-
-  async function loadObservations() {
-    await fetch("/load").then(res => res.json()).then(setLoadedPoints).catch(console.error);
-  }
-
-  async function sendObservation(observation) {
-    await fetch("/save", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(observation)
-    }).then(() => {
-      console.log("observation saved");
-      loadObservations();
-    }).catch(console.error);
-  }
+  const [currentObservation, setCurrentObservation] = useState(null);
 
   useEffect(() => {
-    loadObservations();
+    if (currentObservation !== null) {
+      sendObservation(currentObservation).then(() => {
+        loadObservations().then(obs => setLoadedPoints(obs));
+      }).catch(console.error)
+    }
+  }, [currentObservation])
+  
+
+  useEffect(() => {
+    loadObservations().then((obs) => setLoadedPoints(obs));
   }, []);
   
   return (
     <CalciteShell contentBehind>
       <CalciteShellPanel slot="panel-start" position="start">
         <CalcitePanel heading="Data Entry">
-          <DataEntry location={currentPoint} onSubmit={(value) => sendObservation(value)}></DataEntry>
+          <DataEntry location={currentPoint} onSubmit={(value) => setCurrentObservation(value)}></DataEntry>
         </CalcitePanel>
       </CalciteShellPanel>
       <MapContainer onMapLoad={() => {console.log("Loaded")}} onMapClick={(mapPoint) => setCurrentPoint(mapPoint)} loadedPoints={loadedPoints}></MapContainer>
