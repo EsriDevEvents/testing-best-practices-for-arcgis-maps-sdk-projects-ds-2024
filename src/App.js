@@ -9,12 +9,17 @@ import DataEntry from "./components/DataEntry";
 
 import {loadObservations, sendObservation} from "./api/fetchData";
 
-
+/**
+ * Main component of the application
+ */
 function App() {
+
+  // Application state
   const [currentPoint, setCurrentPoint] = useState(null);
   const [loadedPoints, setLoadedPoints] = useState([]);
   const [currentObservation, setCurrentObservation] = useState(null);
 
+  // Save the observation created by DataEntry component
   useEffect(() => {
     if (currentObservation !== null) {
       sendObservation(currentObservation).then(() => {
@@ -23,7 +28,7 @@ function App() {
     }
   }, [currentObservation])
   
-
+  // Load all of the current observations to the map
   useEffect(() => {
     loadObservations().then((obs) => setLoadedPoints(obs));
   }, []);

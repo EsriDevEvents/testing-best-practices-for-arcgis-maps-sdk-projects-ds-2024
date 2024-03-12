@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { setAssetPath } from '@esri/calcite-components/dist/components';
 import "@esri/calcite-components/dist/calcite/calcite.css";
 
+// Set asset path so Calcite knows where to get its assets
 setAssetPath(window.location.href);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

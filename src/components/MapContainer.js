@@ -8,7 +8,7 @@ import Point from "@arcgis/core/geometry/Point";
 import "@arcgis/core/assets/esri/themes/light/main.css";
 import "./MapContainer.css";
 
-// Set up web map and mapview outside the React object so that
+// Set up map, mapview, and layers outside the React object so that
 // they don't get recreated on re-renders
 const map = new Map({
     basemap: "topo-vector"
@@ -29,7 +29,8 @@ const pointLayer = new GraphicsLayer();
 map.add(pointLayer);
 
 /**
- * 
+ * Component that controls interactions with the map.
+ *  
  * @param {Object} param0 React parameters passed to the object
  * @param {Function} param0.onMapLoad Called when the map is loaded
  * @param {Function} param0.onMapClick Called when the map is clicked
@@ -39,10 +40,11 @@ function MapContainer({ onMapLoad, onMapClick, loadedPoints }) {
 
     const mapDiv = useRef(null);
 
+    // Handle a click on the map
     useEffect(() => {
         view.on("click", (event) => {
-            console.log("Map Clicked!");
-            // Determine if anything got hit...
+            
+            // Determine if user clicked on a point graphic or a blank area...
             view.hitTest(event, {include: [pointLayer]}).then(hits => {
                 if (hits.results.length === 0) {
 
@@ -56,15 +58,16 @@ function MapContainer({ onMapLoad, onMapClick, loadedPoints }) {
 
                     pinLayer.add(pinGraphic);
 
+                    // Call event handler
                     onMapClick(event.mapPoint);
                 }
             })
         });
     }, [onMapClick]);
 
+    // Load observations to the map
     useEffect(() => {
         pointLayer.removeAll();
-        console.log("Updating points...");
         loadedPoints.forEach((pt) => {
             const ptGraphic = new Graphic({
                 geometry: new Point({ latitude: pt.latitude, longitude: pt.longitude }),
@@ -82,6 +85,7 @@ function MapContainer({ onMapLoad, onMapClick, loadedPoints }) {
         pinLayer.removeAll();
     }, [loadedPoints]);
 
+    // Notify when map finishes loading
     useEffect(() => {
         view.container = mapDiv.current;
 

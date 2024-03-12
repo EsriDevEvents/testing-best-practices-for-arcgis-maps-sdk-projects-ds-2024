@@ -24,6 +24,7 @@ jest.mock("@esri/calcite-components-react", () => {
   };
 });
 
+// Mock our API so we can control responses
 jest.mock("../api/fetchData");
 
 test("renders", async () => {
@@ -32,4 +33,6 @@ test("renders", async () => {
   await act(async () => {
     render(<App/>);
   });
+
+  expect(loadObservations).toHaveBeenCalled();
 });
